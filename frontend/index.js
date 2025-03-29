@@ -161,11 +161,11 @@ function displayTasks(TasksArray){
         task_info_div.appendChild(card_status_p);
 
         const edit_img = document.createElement('img');
-        edit_img.setAttribute("src", "/images/edit.png");
+        edit_img.setAttribute("src", "images/edit.png");
         task_info_div.appendChild(edit_img);
 
         const delete_img = document.createElement('img');
-        delete_img.setAttribute("src", "/images/delete.png");
+        delete_img.setAttribute("src", "images/delete.png");
         delete_img.setAttribute("alt", `${eachCard.task_id}`);
         task_info_div.appendChild(delete_img);
 
