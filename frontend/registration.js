@@ -3,13 +3,6 @@ const signup_btn_el = document.querySelector("#signup-btn");
 const registration_page_el = document.querySelector(".registration-page");
 const dashboard_el = document.querySelector(".dashboard");
 
-if(document.cookie){
-    openDashboard();
-    let token = localStorage.getItem("jwtToken");
-    let userInfo = parseJwt(token);
-    setaUserProfile(userInfo);
-}
-
 function parseJwt(token) {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -31,7 +24,6 @@ function openDashboard(){
 
 const login_username_el = document.querySelector("#login-username");
 const login_password_el = document.querySelector("#login-password");
-
 async function login(){
 
     let username = login_username_el.value;
@@ -56,10 +48,9 @@ async function login(){
         }
         const token = await response.text();
         let userInfo = parseJwt(token);
-        setaUserProfile(userInfo);
+        setUserProfile(userInfo);
 
         localStorage.setItem("jwtToken", token);
-        document.cookie = `jwtToken = ${token}; path = /; max-age = ${12*60*60}`;
 
         openDashboard();
         getAllTask();
@@ -74,9 +65,9 @@ async function login(){
 login_btn_el.addEventListener("click", login);
 
 
-let signup_username_el = document.querySelector("#signup-username");
-let signup_email_el = document.querySelector("#signup-email");
-let signup_password_el = document.querySelector("#signup-password");
+const signup_username_el = document.querySelector("#signup-username");
+const signup_email_el = document.querySelector("#signup-email");
+const signup_password_el = document.querySelector("#signup-password");
 
 signup_btn_el.addEventListener("click", () => {
     let username = signup_username_el.value;
@@ -96,7 +87,6 @@ signup_btn_el.addEventListener("click", () => {
     }
     else alert("Enter all the Fields");
 });
-
 
 async function signup(signupData){
 
@@ -131,7 +121,6 @@ const login_page_el = document.querySelector(".login-page");
 const signin_page_el = document.querySelector(".sign-in-page");
 const login_text_el = document.querySelector(".log-in-text");
 
-
 signin_text_el.addEventListener("click", () => {
 
     login_page_el.classList.add('deactivate')
@@ -147,17 +136,57 @@ login_text_el.addEventListener("click", ()=> {
 });
 
 
-function setaUserProfile(userInfo){
-    document.querySelector("#profile-user-input").value = userInfo.username;
-    document.querySelector("#profile-email-input").value = userInfo.email;
-    document.querySelector("#profile-password-input").value = "";
+const profile_user_el = document.querySelector("#profile-user-input");
+const profile_email_el = document.querySelector("#profile-email-input");
+const profile_password_el = document.querySelector("#profile-password-input");
+function setUserProfile(userInfo){
+    profile_user_el.value = userInfo.username;
+    profile_email_el.value = userInfo.email;
+    profile_password_el.value = userInfo.password;
 }
 
 
 const log_out_el = document.querySelector(".log-out");
-
-log_out_el.addEventListener("click", () => {
+log_out_el.addEventListener("click", logout);
+function logout(){
     document.cookie = `jwtToken =; path = /; max-age =0`;
     localStorage.removeItem("jwtToken");
     location.reload();
-})
+}
+
+const save_el = document.querySelector(".save");
+save_el.addEventListener("click", () => {
+    if(profile_user_el.value === "" || profile_password_el.value === "" || profile_email_el.value === ""){
+        alert("Do not leave any fields empty");
+        return;
+    }
+    const data = {
+        username : profile_user_el.value,
+        email : profile_email_el.value,
+        password : profile_password_el.value
+    }
+    updateProfile(data);
+});
+
+async function updateProfile(data){
+    try{
+        const response = await fetch("http://localhost:8080/profile", {
+            method : "PUT",
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`
+            },
+            body : JSON.stringify(data)
+        });
+
+        if(!response.ok){
+            throw new Error("Profile Updation Failed");
+        }
+
+        logout();
+        alert("Profile Updated Now login");
+    }
+    catch(err){
+        console.log(err);
+    }
+}
