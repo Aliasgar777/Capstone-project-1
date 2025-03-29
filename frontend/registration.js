@@ -142,7 +142,7 @@ const profile_password_el = document.querySelector("#profile-password-input");
 function setUserProfile(userInfo){
     profile_user_el.value = userInfo.username;
     profile_email_el.value = userInfo.email;
-    profile_password_el.value = userInfo.password;
+    profile_password_el.value = "";
 }
 
 
