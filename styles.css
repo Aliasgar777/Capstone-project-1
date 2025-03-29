@@ -1,0 +1,630 @@
+*{
+    font-family: 'Noto Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #D1ECFF;
+}
+
+/* made changes here */
+.registration-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-heading{
+    margin-top: 7rem;
+    margin-bottom: 4rem;
+    margin-right: 1.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 35px;
+    color: #212121;
+}
+
+img{
+    height: 35px;
+    margin: 10px;
+}
+
+.login-page{
+    background-color: #6CB1DA;
+    height: 350px;
+    width: 400px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow:10px 10px #212121;
+    border: 3px solid #D1ECFF;
+}
+
+.login-cred{
+    width: 300px;
+}
+
+.login-page h2{
+    margin: 1rem;
+    font-weight: 500;
+    background-color: #1E5470;
+    padding: 5px 30px 5px 30px;
+    border-radius: 3px;
+    color: aliceblue;
+}
+
+.login-cred p{
+    font-size: larger;
+    margin: 0.3rem;
+}
+
+.input-field{
+    display: flex;
+    align-items: center;
+    margin: 0.5rem;
+    gap: 0.7rem;
+    background-color: aliceblue;
+    border-radius: 3px;
+}
+
+.input-field input{
+    width: 100%;
+    border: none;
+    background-color: aliceblue;
+    height: 25px;
+    border-radius: 3px;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+}
+
+.input-field input::placeholder{
+    color: rgb(116, 115, 115);
+}
+
+.login-btn{
+    margin: 2rem;
+    width: 150px;
+    height: 30px;
+    border-radius: 3px;
+    border: none;
+    background-color: aliceblue;
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 0.5rem;
+}
+
+.login-btn:hover{
+    background-color: #1E5470;
+    color: aliceblue;
+    transition:  0.2s;
+}
+
+.sign-in-text{
+    color: aliceblue;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.sign-in-text:hover{
+    text-decoration: underline;
+}
+
+.sign-in-page{
+    background-color: #6CB1DA;
+    height: 420px;
+    width: 400px;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    box-shadow:10px 10px #212121;
+    border: 3px solid #D1ECFF;
+}
+
+.sign-in-page h2{
+    margin: 1rem;
+    font-weight: 500;
+    background-color: #1E5470;
+    padding: 5px 30px 5px 30px;
+    border-radius: 3px;
+    color: aliceblue;
+}
+
+.input-field img{
+    width: 25px;
+    height: 25px;
+    margin: 0;
+}
+
+.log-in-text{
+    color: aliceblue;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.log-in-text:hover{
+    text-decoration: underline;
+}
+
+
+
+.dashboard{
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    background-color:  #1E5470;
+    position: fixed;
+    top: 0;
+}
+
+.header h2{
+    display: flex;
+    align-items: center;
+    color: aliceblue;
+    margin-left: 1.5rem;
+}
+
+.header img{
+    margin-right: 1.5rem;
+    background-color: aliceblue;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+
+.header img:hover{
+    background-color: #CBEAEC;
+    transition: 0.2s;
+}
+
+.main-page{
+    display: flex;
+}
+
+.sidebar{
+    width: 300px;
+    height: 100%;
+    background-color: #6CB1DA;
+    position: fixed;
+    margin-top: 55px;
+}
+
+.cards-display{
+    width: 100%;
+    margin-left: 300px;
+    margin-top: 55px;
+}
+
+.status{
+    display: flex;
+    align-items: center;
+    font-size: large;
+    margin: 1.5rem;
+}
+
+.status:hover{
+    border-radius: 30px;
+    background-color: #1E5470;
+    color: aliceblue;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+
+.active{
+    display: flex;
+}
+
+.deactivate{
+    display: none;
+}
+
+.cards-display-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 2rem;
+}
+
+.cards-display-header h2{
+    font-weight: 500;
+    color: #212121;
+}
+
+.cards-display-header button{
+    width: 150px;
+    height: 30px;
+    border-radius: 3px;
+    border: none;
+    background-color: #6CB1DA;
+    color: aliceblue;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.cards-display-header button:hover{
+    background-color: #1E5470;
+    transition:  0.2s;
+    color: aliceblue;
+}
+
+.profile-modal{
+    display: none;
+    position:fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.profile{
+    background-color: #6CB1DA;
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: aliceblue;
+}
+
+.profile-title{
+    font-size: x-large;
+    font-weight: 500;
+}
+
+.profile-header img{
+    margin-right: 0.7rem;
+    background-color: aliceblue;
+    border-radius: 50%;
+    border: 3px solid #1E5470;
+    width: 35px;
+    height: 35px;
+}
+
+.close{
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+}
+
+.close:hover, .close:focus{
+    transform: scale(1.2);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.profile-info{
+    width: 250px;
+    margin-top: 1.5rem;
+}
+
+.btn{
+    width: 150px;
+    height: 30px;
+    border-radius: 3px;
+    border: none;
+    background-color: aliceblue;
+    font-weight: 500;
+    font-size: 15px;
+    color: #212121;
+}
+
+
+.profile-btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.save{
+    margin: 3rem;
+}
+
+.save:hover{
+    background-color: green;
+    color: aliceblue;
+}
+
+.log-out:hover{
+    background-color: red;
+    color: aliceblue;
+}
+
+.update-task-modal{
+    display: none;
+    position:fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.create-task-modal{
+    display: none;
+    position:fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.priority-createTask{
+    display: flex;
+    align-items: center;
+}
+
+.priority-createTask p {
+    margin-right: 1rem;
+    font-size: large;
+}
+
+.priority-filter{
+    display: flex;
+    margin-right: 2rem;
+    align-items: center;
+    background-color: #6CB1DA;
+}
+
+.priority-filter div{
+    width: 90px;
+    background-color: #6CB1DA;
+    text-align: center;
+    color: aliceblue;
+    height: 100%;
+}
+
+.priority-filter div:hover{
+    background-color: #1E5470;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.priority-filter div:nth-child(1){
+    border: 3px solid #1E5470;
+}
+
+.priority-filter div:nth-child(2){
+    border-top: 3px solid #1E5470;
+    border-bottom: 3px solid #1E5470;
+}
+
+.priority-filter div:nth-child(3){
+    border: 3px solid #1E5470;
+}
+
+.create-task{
+    background-color: #6CB1DA;
+    height: 420px;
+    width: 420px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.create-task-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.8rem ;
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+.create-task-header h2{
+    font-weight: 500;
+}
+
+.create-task-header span{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.create-task-header span:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.task-title{
+    margin-top: 1rem;
+    width: 80%;
+}
+
+.task-title p{
+    margin: 0.2rem;
+}
+.task-title input{
+    width: 100%;
+    outline: none;
+    height: 30px;
+    padding-left: 0.2rem;
+}
+
+.task-desc{
+    margin-top: 1rem;
+    width: 80%;
+}
+
+.task-desc p{
+    margin: 0.2rem;
+}
+
+.task-desc textarea{
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 0.2rem;
+}
+
+.task-status-priority{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin-top: 1rem;
+}
+
+.task-status{
+    width: 40%;
+}
+
+.task-status p{
+    margin: 0.2rem;
+}
+
+.task-status select{
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.task-priority{
+    width: 40%;
+}
+
+.task-priority p{
+    margin: 0.2rem;
+}
+
+.task-priority select{
+    width: 100%;
+    height: 25px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.task-footer{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.task-date{
+    width: 40%;
+}
+
+.task-date p{
+    margin-bottom: 0.2rem;
+}
+
+.task-date input{
+    width: 100%;
+    height: 25px;
+}
+
+.task-footer button{
+    width: 40%;
+    margin-top: 1.3rem;
+    height: 25px;
+    background-color: lightgreen;
+    border: none;
+    border-radius: 5px;
+}
+
+.task-footer button:hover{
+    background-color: green;
+    color: aliceblue;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    gap: 20px;
+    padding: 2rem;
+}
+
+.card{
+    background-color: #6CB1DA;
+    height: 250px;
+    max-width: 350px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-and-desc{
+    width: 90%;
+    height: 90%;
+}
+
+.title{
+    width: 100%;
+    height: 35px;
+    margin-top: 1rem;
+    background-color: aliceblue;
+    border-radius: 5px;
+    padding: 0.3rem;
+    font-size: large;
+    font-weight: 400;
+}
+
+.title-desc{
+    width: 100%;
+    height: 110px;
+    margin-top: 1rem;
+    background-color: aliceblue;
+    padding: 0.3rem;
+    border-radius: 5px;
+    font-size: medium;
+    font-weight: 350;
+}
+
+.task-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 90%;
+    background-color: aliceblue;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    font-size: small;
+    font-weight: 350;
+}
+
+.task-info img{
+    background-color: #1E5470;
+    height: 25px;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.task-info img:hover{
+    background-color: red;
+    transform: scale(1.2);
+    transition: 0.2s;  
+}
