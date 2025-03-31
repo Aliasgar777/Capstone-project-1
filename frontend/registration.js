@@ -73,17 +73,22 @@ signup_btn_el.addEventListener("click", () => {
     let username = signup_username_el.value;
     let email = signup_email_el.value;
     let password = signup_password_el.value;
+    let trimedPass = password.trim();
 
     console.log(username, email, password);
 
-    if(username !== "" && email !== "" && password !== ""){
-        const signupData = {
-            username : username,
-            email : email,
-            password : password
+    if(username !== "" && email !== "" && trimedPass !== ""){
+        
+        if(email.endsWith("gmail.com")){
+            const signupData = {
+                username : username,
+                email : email,
+                password : trimedPass
+            }
+    
+            signup(signupData);
         }
-
-        signup(signupData);
+        else alert("Enter Email with domain gmail.com");
     }
     else alert("Enter all the Fields");
 });
@@ -156,14 +161,18 @@ function logout(){
 
 const save_el = document.querySelector(".save");
 save_el.addEventListener("click", () => {
-    if(profile_user_el.value === "" || profile_password_el.value === "" || profile_email_el.value === ""){
+    if(profile_user_el.value === "" || (profile_password_el.value).trim() === "" || profile_email_el.value === ""){
         alert("Do not leave any fields empty");
         return;
+    }
+    if(!(profile_email_el.value).endsWith("@gmail.com")){
+        alert("Enter Email with domain gmail.com");
+        return ;
     }
     const data = {
         username : profile_user_el.value,
         email : profile_email_el.value,
-        password : profile_password_el.value
+        password : (profile_password_el.value).trim()
     }
     updateProfile(data);
 });
