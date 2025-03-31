@@ -627,3 +627,265 @@ img{
     transform: scale(1.2);
     transition: 0.2s;  
 }
+
+
+/* ==== Base Responsive Styles ==== */
+@media screen and (max-width: 1200px) {
+    
+    .cards {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ==== Tablet Styles ==== */
+@media screen and (max-width: 768px) {
+   
+    .app-heading {
+        font-size: 28px;
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+        margin-right: 0;
+        justify-content: center;
+    }
+    
+    
+    .header h2 {
+        font-size: 24px;
+    }
+    
+    
+    .sidebar {
+        width: 220px;
+    }
+    
+    
+    .priority-createTask {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .cards-display-header {
+        height: auto;
+        padding: 15px;
+    }
+    
+    
+    .cards {
+        grid-template-columns: 1fr ;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    
+    .create-task, .profile {
+        width: 90%;
+        max-width: 380px;
+    }
+}
+
+/* ==== Mobile Styles ==== */
+@media screen and (max-width: 576px) {
+
+    .login-page, .sign-in-page {
+        width: 90%;
+        max-width: none;
+        box-shadow: 5px 5px #212121;
+    }
+    
+    .main-page {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        margin-top: 0;
+        position: static;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        margin-top: 55px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .status {
+        padding: 8px;
+        margin: 5px;
+        width: auto;
+    }
+    
+    .cards-display {
+        margin-left: 0;
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    /* Cards display */
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 10px;
+    }
+    
+    .card {
+        max-width: none;
+        width: 100%;
+    }
+    
+    
+    .cards-display-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .priority-createTask {
+        width: 100%;
+    }
+    
+    .priority-filter {
+        width: 100%;
+        margin-right: 0;
+        justify-content: space-between;
+    }
+    
+    .priority-filter div {
+        flex: 1;
+    }
+    
+    .cards-display-header button {
+        width: 100%;
+    }
+    
+    
+    .create-task, .profile {
+        width: 95%;
+        height: auto;
+        min-height: 420px;
+        max-width: none;
+    }
+    
+    .profile {
+        width: 100%;
+        margin-top: 55px;
+    }
+
+    .profile-title{
+        margin-right: 1rem;
+    }
+    
+    .profile-header img{
+        display: none;
+    }
+
+    .log-out{
+        margin-bottom: 2rem;
+    }
+    
+    .task-status-priority {
+        flex-direction: column;
+    }
+    
+    .task-status, .task-priority {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .task-footer {
+        flex-direction: column;
+    }
+    
+    .task-date {
+        width: 100%;
+    }
+    
+    .task-footer button {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .create-task{
+        height: 550px;
+    }
+}
+
+/* ==== Small Mobile Styles ==== */
+@media screen and (max-width: 375px) {
+    .app-heading {
+        font-size: 22px;
+    }
+    
+    .header h2 {
+        font-size: 18px;
+    }
+    
+    .header img {
+        width: 25px;
+        height: 25px;
+    }
+    
+    
+    .sidebar img {
+        height: 20px;
+        margin: 5px;
+    }
+    
+    .status {
+        font-size: 14px;
+        margin: 3px;
+        padding: 5px;
+    }
+    
+    
+    .task-info {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 5px 2px;
+        gap: 5px;
+    }
+    
+}
+
+/* ==== Fix for Modal Display ==== */
+@media screen and (max-width: 576px) {
+    .update-task-modal, .create-task-modal {
+        align-items: center;
+        overflow-y: auto;
+    }
+    
+    .create-task {
+        margin-bottom: 20px;
+    }
+}
+
+/* ==== Critical Dashboard Mobile Fix ==== */
+@media screen and (max-width: 576px) {
+    
+    .dashboard {
+        display: flex; 
+    }
+    
+    .dashboard .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+    
+    .main-page {
+        width: 100%;
+    }
+    
+    
+    .sidebar {
+        overflow-x: auto;
+        white-space: nowrap;
+        justify-content: flex-start;
+        padding: 5px 0;
+    }
+}
