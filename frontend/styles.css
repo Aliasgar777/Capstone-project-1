@@ -629,7 +629,7 @@ img{
 }
 
 
-/* ==== Base Responsive Styles ==== */
+/*  Base Responsive Styles  */
 @media screen and (max-width: 1200px) {
     
     .cards {
@@ -637,7 +637,7 @@ img{
     }
 }
 
-/* ==== Tablet Styles ==== */
+/*  Tablet Styles  */
 @media screen and (max-width: 768px) {
    
     .app-heading {
@@ -684,7 +684,7 @@ img{
     }
 }
 
-/* ==== Mobile Styles ==== */
+/*  Mobile Styles  */
 @media screen and (max-width: 576px) {
 
     .login-page, .sign-in-page {
@@ -813,7 +813,7 @@ img{
     }
 }
 
-/* ==== Small Mobile Styles ==== */
+/*  Small Mobile Styles  */
 @media screen and (max-width: 375px) {
     .app-heading {
         font-size: 22px;
@@ -850,7 +850,7 @@ img{
     
 }
 
-/* ==== Fix for Modal Display ==== */
+/*  Fix for Modal Display  */
 @media screen and (max-width: 576px) {
     .update-task-modal, .create-task-modal {
         align-items: center;
@@ -862,7 +862,7 @@ img{
     }
 }
 
-/* ==== Critical Dashboard Mobile Fix ==== */
+/*  Critical Dashboard Mobile Fix  */
 @media screen and (max-width: 576px) {
     
     .dashboard {
@@ -870,10 +870,6 @@ img{
     }
     
     .dashboard .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
         z-index: 1000;
     }
     
