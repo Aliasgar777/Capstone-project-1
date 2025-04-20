@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.exception.ResourceAlreadyExistsException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.exception.UnauthorizedAccessException;
 import com.example.demo.model.Users;
@@ -30,6 +31,9 @@ public class UserService {
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     public Users register(Users user){
+        if(repo.findByUsername(user.getUsername()) != null){
+            throw new ResourceAlreadyExistsException("Username already taken.");
+        }
         user.setPassword(encoder.encode(user.getPassword()));
         return repo.save(user);
     }
@@ -37,13 +41,13 @@ public class UserService {
     public String verify(Users user) {
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
-        if(authentication.isAuthenticated()){
-            return jwtService.generateToken(user.getUsername());
+        if(!authentication.isAuthenticated()){
+            throw new UnauthorizedAccessException("Invalid username or password");
         }
-        return "User details is incorrect";
+        return jwtService.generateToken(user.getUsername());
     }
 
-    public ResponseEntity<String> updateProfile(Users user){
+    public void updateProfile(Users user){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (!(principal instanceof UserDetails)){
             throw new UnauthorizedAccessException("User is not authenticated");
@@ -55,21 +59,11 @@ public class UserService {
             throw new ResourceNotFoundException("User not found: " + username);
         }
 
-        if (user.getUsername() != null && !user.getUsername().isEmpty()) {
-            loggedUser.setUsername(user.getUsername());
-        }
-
-        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
-            loggedUser.setEmail(user.getEmail());
-        }
-
-        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
-            loggedUser.setPassword(encoder.encode(user.getPassword()));
-        }
+        loggedUser.setUsername(user.getUsername());
+        loggedUser.setEmail(user.getEmail());
+        loggedUser.setPassword(encoder.encode(user.getPassword()));
 
         repo.save(loggedUser);
-
-        return new ResponseEntity<>("Profile Updated Successfully", HttpStatus.OK);
     }
 
 }

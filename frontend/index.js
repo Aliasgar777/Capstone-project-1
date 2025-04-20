@@ -107,74 +107,62 @@ async function getAllTask(){
 
 const cards_el = document.querySelector(".cards");
 
-function displayTasks(TasksArray){
+function createElement(tag, className, textContent) {
+    const el = document.createElement(tag);
+    if (className) el.classList.add(className);
+    if (textContent !== undefined) el.textContent = textContent;
+    return el;
+}
+
+function getPriorityColor(priority) {
+    switch (priority.toLowerCase()) {
+        case 'low': return 'darkgreen';
+        case 'medium': return 'blue';
+        case 'high': return 'red';
+        default: return 'black';
+    }
+}
+
+function displayTasks(TasksArray) {
     cards_el.innerHTML = "";
 
-    TasksArray.forEach(eachCard => {
-
-        const card_div = document.createElement('div');
-        card_div.classList.add('card');
-        card_div.id = `_${eachCard.task_id}`;
+    TasksArray.forEach(({ task_id, title, description, date, priority, status }) => {
+        const card_div = createElement('div', 'card');
+        card_div.id = `_${task_id}`;
         cards_el.appendChild(card_div);
 
-        const title_and_desc_div = document.createElement('div');
-        title_and_desc_div.classList.add('title-and-desc');
+        // Title and Description
+        const title_and_desc_div = createElement('div', 'title-and-desc');
         card_div.appendChild(title_and_desc_div);
+        title_and_desc_div.appendChild(createElement('div', 'title', title));
+        title_and_desc_div.appendChild(createElement('div', 'title-desc', description));
 
-        const title_div = document.createElement('div');
-        title_div.classList.add('title');
-        title_div.innerText = eachCard.title;
-        title_and_desc_div.appendChild(title_div);
-
-        const title_desc_div = document.createElement('div');
-        title_desc_div.classList.add('title-desc');
-        title_desc_div.innerText = eachCard.description;
-        title_and_desc_div.appendChild(title_desc_div);
-
-        
-        const task_info_div = document.createElement('div');
-        task_info_div.classList.add('task-info');
+        // Task Info
+        const task_info_div = createElement('div', 'task-info');
         card_div.appendChild(task_info_div);
 
-        const date_p = document.createElement('p');
-        date_p.classList.add('date');
-        date_p.textContent = eachCard.date;
-        task_info_div.appendChild(date_p);
+        task_info_div.appendChild(createElement('p', 'date', date));
 
-        const priority_p = document.createElement('p');
-        priority_p.classList.add('priority');
-        priority_p.textContent = eachCard.priority;
-        if(eachCard.priority == "Low"){
-            priority_p.style.color = 'darkgreen';
-        }
-        else if(eachCard.priority == "Medium"){
-            priority_p.style.color = 'blue';
-        }
-        else{
-            priority_p.style.color = 'red';
-        }
+        const priority_p = createElement('p', 'priority', priority);
+        priority_p.style.color = getPriorityColor(priority);
         task_info_div.appendChild(priority_p);
 
-        const card_status_p = document.createElement('p');
-        card_status_p.classList.add('card-status');
-        card_status_p.textContent = eachCard.status;
-        task_info_div.appendChild(card_status_p);
+        task_info_div.appendChild(createElement('p', 'card-status', status));
 
         const edit_img = document.createElement('img');
-        edit_img.setAttribute("src", "images/edit.png");
+        edit_img.src = "images/edit.png";
+        edit_img.alt = "Edit";
         task_info_div.appendChild(edit_img);
 
         const delete_img = document.createElement('img');
-        delete_img.setAttribute("src", "images/delete.png");
-        delete_img.setAttribute("alt", `${eachCard.task_id}`);
+        delete_img.src = "images/delete.png";
+        delete_img.alt = `${task_id}`;
         task_info_div.appendChild(delete_img);
 
         add_eventListenerOn_deleteBtn(delete_img);
-        add_eventListenerOn_editBtn(edit_img, eachCard);
-        handleDeadline(eachCard);
-
+        add_eventListenerOn_editBtn(edit_img, { task_id, title, description, date, priority, status });
+        handleDeadline({ task_id, title, description, date, priority, status });
     });
-
 }
 
 function handleDeadline(Task){
@@ -218,7 +206,8 @@ function displayTaskToBeUpdated(Task){
     update_priority_input_el.value = Task.priority;
     update_date_input_el.value = Task.date;
 
-    update_btn_el.addEventListener("click", () => createUpdatedTask(Task.task_id));
+    update_btn_el.onclick = () => createUpdatedTask(Task.task_id);
+
 }
 
 function createUpdatedTask(id){

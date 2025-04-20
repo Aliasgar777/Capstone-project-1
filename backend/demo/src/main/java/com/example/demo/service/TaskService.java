@@ -30,7 +30,6 @@ public class TaskService {
     public List<Task> getAllTask(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-
         String username = ((UserDetails) principal).getUsername();
         Users user = userRepo.findByUsername(username);
 
@@ -43,7 +42,6 @@ public class TaskService {
 
     public Task addTask(Task task){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 
         String username = ((UserDetails) principal).getUsername();
         Users user = userRepo.findByUsername(username);
@@ -66,7 +64,7 @@ public class TaskService {
         }).orElse(null);
     }
 
-    public ResponseEntity<String> deleteTask(int id){
+    public String deleteTask(int id){
 
         Optional<Task> optionalTask = repo.findById(id);
 
@@ -80,16 +78,15 @@ public class TaskService {
 
             repo.deleteById(id);
 
-            return ResponseEntity.ok("Task Deleted Succesfully");
+            return "Task Deleted Succesfully";
         }
         else{
-            return new ResponseEntity<>("resource with "+ id +" not found", HttpStatus.NOT_FOUND);
+            throw new ResourceNotFoundException("Resource with "+ id + " not found");
         }
     }
 
     public List<Task> getTaskWithStatus(String status){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 
         String username = ((UserDetails) principal).getUsername();
         Users user = userRepo.findByUsername(username);

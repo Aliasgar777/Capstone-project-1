@@ -42,6 +42,7 @@ async function login(){
             },
             body : JSON.stringify(loginData)
         });
+        // console.log(response);
 
         if(!response.ok){
             throw new Error("Login failed invalid credentials");
@@ -154,7 +155,6 @@ function setUserProfile(userInfo){
 const log_out_el = document.querySelector(".log-out");
 log_out_el.addEventListener("click", logout);
 function logout(){
-    document.cookie = `jwtToken =; path = /; max-age =0`;
     localStorage.removeItem("jwtToken");
     location.reload();
 }

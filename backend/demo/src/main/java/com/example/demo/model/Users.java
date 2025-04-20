@@ -22,7 +22,7 @@ public class Users {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Task> tasks;
 
@@ -85,4 +85,5 @@ public class Users {
                 ", password='" + password + '\'' +
                 '}';
     }
+
 }
