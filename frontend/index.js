@@ -67,7 +67,11 @@ async function addTask(taskData){
         if(!response.ok){
             alert("failed to add task");
         }
-        else getAllTask();
+        else{
+            const data = await response.json();
+            TasksArray.push(data);
+            displayTasks(TasksArray);
+        };
 
     }
     catch(err){
@@ -96,6 +100,7 @@ async function getAllTask(){
             const data = await response.json();
             TasksArray.length = 0;
             TasksArray = TasksArray.concat(data);
+            console.log(TasksArray);
             displayTasks(data);
         }
 
@@ -131,13 +136,11 @@ function displayTasks(TasksArray) {
         card_div.id = `_${task_id}`;
         cards_el.appendChild(card_div);
 
-        // Title and Description
         const title_and_desc_div = createElement('div', 'title-and-desc');
         card_div.appendChild(title_and_desc_div);
         title_and_desc_div.appendChild(createElement('div', 'title', title));
         title_and_desc_div.appendChild(createElement('div', 'title-desc', description));
 
-        // Task Info
         const task_info_div = createElement('div', 'task-info');
         card_div.appendChild(task_info_div);
 
@@ -244,7 +247,12 @@ async function updateTaskData(data, id){
             throw new Error("Update unsuccessfull");
         }
         else{
-            getAllTask();
+            const taskToUpdate = TasksArray.find(task => task.task_id === id);
+            if (taskToUpdate) {
+                Object.assign(taskToUpdate, data);
+            }
+
+            displayTasks(TasksArray);
             update_task_modal_el.style.display = "none";
         }
     }
@@ -277,8 +285,13 @@ async function deletById(id){
         if(!response.ok){
             throw new Error("Tasks not deleted");
         }
-
-        getAllTask();
+        else{
+            const index = TasksArray.findIndex(task => task.task_id === id);
+            if (index !== -1) {
+                TasksArray.splice(index, 1);
+            }
+            displayTasks(TasksArray);
+        }
     }
     catch(err){
         console.log(err);
