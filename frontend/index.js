@@ -306,34 +306,39 @@ status_els.forEach( (status_el) => {
             displayTasksByStatus(e.target.innerText);
         }
         else{
-            getAllTask();
+            displayTasks(TasksArray);
         }
     })
 } );
 
 
-async function displayTasksByStatus(st){
-    try{
-        const response = await fetch(`http://localhost:8080/tasks/status/${st}`, {
-            method: "GET",
-            headers : {
-                "Content-Type" : "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`
-            },
-            credentials : "include"
-        });
-
-        if(!response.ok){
-            throw new Error("Fetch by status failed");
-        }
-
-        const data = await response.json();
-        displayTasks(data);
-    }
-    catch(err){
-        console.log(err);
-    }
+function displayTasksByStatus(status){
+    let newArr = TasksArray.filter( (task) => task.status === status);
+    displayTasks(newArr);
 }
+
+// async function displayTasksByStatus(st){
+//     try{
+//         const response = await fetch(`http://localhost:8080/tasks/status/${st}`, {
+//             method: "GET",
+//             headers : {
+//                 "Content-Type" : "application/json",
+//                 "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`
+//             },
+//             credentials : "include"
+//         });
+
+//         if(!response.ok){
+//             throw new Error("Fetch by status failed");
+//         }
+
+//         const data = await response.json();
+//         displayTasks(data);
+//     }
+//     catch(err){
+//         console.log(err);
+//     }
+// }
 
 
 const priority_filter_el = document.querySelector(".priority-filter");
